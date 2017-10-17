@@ -1,0 +1,21 @@
+
+<h1>Manhattan FiDi Restaurants</h1>
+<%= erb :login %>
+
+<br><br>
+<% if @current_user %>
+<a href="/restaurants/new">Add new restaurant</a>
+<br><br>
+
+<h1>List of Restaurants</h1>
+<% @current_user.restaurants.each do |restaurant| %>
+	<div class="restaurant">
+		<ul>
+			<li>
+				<%= restaurant.name %> <br>
+				<%= restaurant.order %>
+			</li>
+		</ul>
+	</div>
+<% end %>
+<% end %>
