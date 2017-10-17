@@ -10,7 +10,7 @@ User.create([
 	id: 2, 
 	first: 'Vikki', 
 	last: 'Braxton', 
-	username: 'vbraxtvi', 
+	username: 'vbraxton', 
 	password: 'nycda2'
 }])
 
@@ -18,11 +18,11 @@ Restaurant.create([
 {
 	id: 1, 
 	name: 'Open Kitchen', 
-	order: 'Sushi'
+	order: 'Salmon, salad, chicken'
 }, {
 	id: 2, 
 	name: 'Grk', 
-	order: 'Portobello griller'
+	order: 'Portobello griller, frozen yogurt'
 }])
 
 Rating.create([
@@ -30,13 +30,15 @@ Rating.create([
 	id: 1, 
 	user_id: 1, 
 	restaurant_id: 1, 
-	rating: 3,
+	rating: 5,
+	review: "Lots of great options!",
 	has_been: true
 }, {
 	id: 2, 
 	user_id: 2, 
 	restaurant_id: 2, 
 	rating: 4,
+	review: "Really filling.",
 	has_been: true
 }])
 

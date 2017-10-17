@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20171017030751) do
     t.integer "user_id"
     t.integer "restaurant_id"
     t.integer "rating"
+    t.text "review"
     t.boolean "has_been"
     t.index ["restaurant_id"], name: "index_ratings_on_restaurant_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"

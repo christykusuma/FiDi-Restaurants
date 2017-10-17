@@ -15,6 +15,7 @@ class InitialSchema < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: {to_table: :users}, index: true
       t.references :restaurant, foreign_key: {to_table: :restaurants}, index: true
       t.integer :rating
+      t.text :review
       t.boolean :has_been
     end
   end

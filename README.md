@@ -226,7 +226,12 @@ Rating.create([
 
 ### If you changed the schema
 
-You should `rake db:drop` then `rake db:migrate` or `rake db:reset`
+You should `rake db:drop` then `rake db:migrate` and `rake db:seed` or `rake db:reset` does it all.
+
 `sqlite3 restaurants.sqlite3`
+
+### If you want to load database on console
+
+You should `irb` and `load './app.rb'
 
 

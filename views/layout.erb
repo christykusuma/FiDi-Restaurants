@@ -7,7 +7,11 @@
 	<link rel="stylesheet" type="text/css" href="/css/default.css">
 </head>
 <body>
+	<!-- Flash messages appear at the top -->
+	<% if flash[:message] %>
+	<div id="notice"> <%= flash[:message] %> </div> <% end %>
 
+	<!-- Rest of body text -->
 	<%= yield %>
 	
 </body>
