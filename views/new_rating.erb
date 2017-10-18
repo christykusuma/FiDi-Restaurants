@@ -1,21 +1,39 @@
 
-<h1>How would you rate it?</h1>
+<div class="new-rating-page">
 
-<form class="rating" method="POST">
+	<h1>How would you rate it?</h1>
 
-	<table>
-		<tr>
-			<td><label>Rating</label></td>
-			<td><input type="number" name="rating" min="1" max="5"></td>
-		</tr>
-		<tr>
-			<td><label>Review</label></td>
-			<td><textarea name="review"></textarea></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit"></td>
-		</tr>
-	</table>
+	<form class="rating-form" method="POST">
 
-</form>
+		<table>
+			<tr>
+				<td><label>Rating</label></td>
+				<td>
+					<span class="rating">
+					  <input id="rating5" type="radio" name="rating" value="5">
+					  <label for="rating5">5</label>
+					  <input id="rating4" type="radio" name="rating" value="4">
+					  <label for="rating4">4</label>
+					  <input id="rating3" type="radio" name="rating" value="3" checked>
+					  <label for="rating3">3</label>
+					  <input id="rating2" type="radio" name="rating" value="2">
+					  <label for="rating2">2</label>
+					  <input id="rating1" type="radio" name="rating" value="1">
+					  <label for="rating1">1</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Review</label></td>
+				<td><textarea class="review-text" name="review"></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="rating-submit" type="submit"></td>
+			</tr>
+		</table>
+
+	</form>
+
+	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+</div>

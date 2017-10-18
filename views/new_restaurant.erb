@@ -1,21 +1,26 @@
 
-<h1>Submit a new restaurant</h1>
+<div class="new-restaurant-page">
+	<a href="/"><button class="back-button"><</button></a>
+	<h1>Submit a new restaurant</h1>
 
-<form class="restaurant" method="POST" action="/restaurants">
+	<form class="restaurant-form" method="POST" action="/restaurants">
 
-	<table>
-		<tr>
-			<td><label>Name</label></td>
-			<td><input name="name"/></td>
-		</tr>
-		<tr>
-			<td><label>Order</label></td>
-			<td><textarea name="order"></textarea></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit"></td>
-		</tr>
-	</table>
+		<table>
+			<tr>
+				<td><label>Name</label></td>
+				<td><input class="restaurant-name" name="name"/></td>
+			</tr>
+			<tr>
+				<td><label>Order</label></td>
+				<td><textarea class="restaurant-text" name="order"></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="restaurant-submit" type="submit"></td>
+			</tr>
+		</table>
 
-</form>
+	</form>
+
+	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+</div>

@@ -1,25 +1,32 @@
 
-<h1>Manhattan FiDi Restaurants</h1>
-<%= erb :login %>
+<div class="home-page">
+	<h1>Manhattan FiDi Restaurants</h1>
+	<hr>
+	<%= erb :login %>
 
-<br><br>
-<% if @current_user %>
-	<a href="/restaurants/new">Add new restaurant</a>
-	<br><br>
+	<% if @current_user %>
+		<!-- List of restaurants (based on user) -->
+		<div class="restaurant-list">
+		<h2>List of Restaurants:</h2>
+		<% @current_user.ratings.each do |rating| %>
+				<ul>
+					<li>
+						<a href="/restaurant/<%=rating.restaurant.id %>"><%= rating.restaurant.name %></a> <br>
+						Past orders: <%= rating.restaurant.order %><br>
+						Review: "<%= rating.review %>"<br>
+						Rating: <%= rating.rating %>
 
-	<!-- List of restaurants (based on user) -->
-	<h1>List of Restaurants</h1>
-	<% @current_user.ratings.each do |rating| %>
-		<div class="restaurant">
-			<ul>
-				<li>
-					<%= rating.restaurant.name %> <br>
-					<%= rating.restaurant.order %><br>
-					<%= rating.review %><br>
-
-				</li>
-			</ul>
+					</li>
+				</ul>
+		<% end %>
 		</div>
+		| <a href="/restaurants/new">Add new restaurant?</a> | 
 	<% end %>
 
-<% end %>
+	<% if @current_user %>
+		<a href="/logout">Logout</a> |
+	<% end %>
+
+
+	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+</div>

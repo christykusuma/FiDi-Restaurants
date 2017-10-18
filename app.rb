@@ -26,6 +26,12 @@ get '/' do
   	erb :home
 end
 
+# Restaurant page
+get '/restaurant/:id' do 
+	@restaurant = Restaurant.find(params[:id])
+	erb :restaurant
+end
+
 # New restaurant form
 get '/restaurants/new' do
 	erb :new_restaurant
@@ -63,16 +69,36 @@ post '/restaurants/:id/ratings' do
 	redirect '/'
 end
 
+# New restaurant form
+get '/signup' do
+	erb :signup
+end
+
+# Signup form
+post '/signup' do
+	user = User.new({
+		first: params[:first],
+		last: params[:last],
+		username: params[:username],
+		password: params[:password]
+	})
+	user.save
+	session[:user_id] = user.id
+	session[:password] = user.password
+	flash[:message] = "Welcome to your restaurant list!"
+	redirect '/'
+end
+
 # Login form
 post '/login' do
 	user = User.find_by(username: params[:username])
 	if user && user.password == params[:password]
 		session[:user_id] = user.id 
 		session[:password] = user.password
-		flash[:message] = "Welcome to your our restaurant list!"
+		flash[:message] = "Welcome to your restaurant list!"
 		redirect '/'
 	else
-		flash[:message] = "Oops, please try again."
+		flash[:message] = "Invalid username and password! Please try again."
 		redirect back
 	end
 end
@@ -80,7 +106,7 @@ end
 # Logout
 get '/logout' do
 	session[:user_id] = nil
-	flash[:message] = "You're logged out."
+	flash[:message] = "You have successfully logged out."
 	redirect '/'
 end
 
