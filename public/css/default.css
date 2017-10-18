@@ -17,7 +17,7 @@ a:hover {
   z-index: -3;
 }
 
-.home-page, .new-rating-page, .new-restaurant-page, .signup-page, .restaurant-page {
+.home-page, .new-rating-page, .new-restaurant-page, .signup-page, .restaurant-page, .edit-page {
 	padding: 70px 20px 150px 20px;
 	background-color: rgba(0, 0, 0, 0.8);
 	border-style: double;
@@ -30,16 +30,15 @@ a:hover {
 	font-family: 'Poppins', sans-serif;
 }
 
-.home-page h1, .new-rating-page h1, .new-restaurant-page h1, .signup-page h1, .restaurant-page h1 {
+.home-page h1, .new-rating-page h1, .new-restaurant-page h1, .signup-page h1, .restaurant-page h1, .edit-page h1{
 	font-size: 2em;
 }
 
-.login-form table, .new-rating-page table, .new-restaurant-page table, .signup-form table {
-	text-align: center;
+.login-form table, .new-rating-page table, .new-restaurant-page table, .signup-form table, .edit-page table {
 	margin-left: 220px;
 }
 
-.login-form td, .new-rating-page td, .new-restaurant-page td, .signup-form td {
+.login-form td, .new-rating-page td, .new-restaurant-page td, .signup-form td, .edit-page td {
 	padding: 10px;
 }
 
@@ -73,6 +72,12 @@ input[type=submit] {
 	width: 240px;
 	margin-right: 15px;
 	text-transform: uppercase;
+}
+
+.restaurant-page #map {
+	margin-left: 90px;
+	height: 350px;
+	width: 550px;
 }
 
 /* New ratings page */
@@ -132,6 +137,20 @@ input[type=submit] {
 
 .restaurant-list li {
 	color: orange;
+}
+
+.edit-button a {
+	margin-bottom: 100px;
+	padding-left: 10px;
+}
+
+.delete-button {
+	font-size: 1.15em;
+	padding: 0 6px;
+    background-color: transparent;
+    background-repeat:no-repeat;
+    color: white;
+    border: none;
 }
 
 /* Flash banner */

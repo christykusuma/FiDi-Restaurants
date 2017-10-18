@@ -4,6 +4,8 @@ require 'sinatra/activerecord'
 require 'sqlite3'
 require './models'
 require 'sinatra/flash'
+require 'open-uri'
+require 'json'
 
 enable :sessions
 set :database, {adapter: 'sqlite3', database: 'restaurants.sqlite3'}
@@ -26,11 +28,52 @@ get '/' do
   	erb :home
 end
 
+# Delete restaurant
+delete '/restaurant/:id' do
+  restaurant = Restaurant.find(params[:id])
+  restaurant.ratings.destroy_all
+  restaurant.destroy
+  redirect '/'
+end
+
+# After editing restaurant 
+put '/restaurants/:id' do
+    restaurant = Restaurant.find(params[:id])
+    restaurant.name = params[:name]
+    restaurant.order = params[:order]
+    restaurant.save
+	redirect '/'
+end
+
+# Edit restaurant page
+get '/restaurant/:id/edit' do
+	@restaurant = Restaurant.find(params[:id])
+	erb :edit
+end
+
 # Restaurant page
 get '/restaurant/:id' do 
 	@restaurant = Restaurant.find(params[:id])
+	unless @restaurant.place_id # go find the place_id if we don't have it
+		begin
+			data = JSON.parse open("https://maps.googleapis.com/maps/api/place/radarsearch/json?location=40.7074909,-74.01127639999999&radius=1000&type=restaurant&name=#{@restaurant.name}&language=en&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
+			@restaurant.place_id = data["results"].first["place_id"]
+			detail_data = JSON.parse open("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@restaurant.place_id}&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
+			@restaurant.search_name = detail_data["result"]["name"]
+			@restaurant.address = detail_data["result"]["formatted_address"]
+			@restaurant.number = detail_data["result"]["formatted_phone_number"]
+			@restaurant.hours = detail_data["result"]["opening_hours"]["weekday_text"]
+			@restaurant.website = detail_data["result"]["website"]
+			@restaurant.lat = detail_data["result"]["geometry"]["location"]["lat"]
+			@restaurant.lng = detail_data["result"]["geometry"]["location"]["lng"]
+			@restaurant.save
+		rescue 
+			p "Failed to pull place data"
+		end
+	end
 	erb :restaurant
 end
+
 
 # New restaurant form
 get '/restaurants/new' do
@@ -85,7 +128,6 @@ post '/signup' do
 	user.save
 	session[:user_id] = user.id
 	session[:password] = user.password
-	flash[:message] = "Welcome to your restaurant list!"
 	redirect '/'
 end
 
@@ -95,7 +137,6 @@ post '/login' do
 	if user && user.password == params[:password]
 		session[:user_id] = user.id 
 		session[:password] = user.password
-		flash[:message] = "Welcome to your restaurant list!"
 		redirect '/'
 	else
 		flash[:message] = "Invalid username and password! Please try again."

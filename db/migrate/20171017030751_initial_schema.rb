@@ -10,6 +10,14 @@ class InitialSchema < ActiveRecord::Migration[5.1]
     create_table :restaurants do |t|
       t.string :name
       t.text :order
+      t.string :place_id
+      t.string :search_name
+      t.string :address
+      t.string :number
+      t.string :hours
+      t.string :website
+      t.float :lat
+      t.float :lng
     end
     create_table :ratings do |t|
       t.references :user, foreign_key: {to_table: :users}, index: true

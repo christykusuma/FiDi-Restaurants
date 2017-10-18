@@ -3,9 +3,39 @@
 	<a href="/"><button class="back-button"><</button></a>
 	<h1>Manhattan FiDi Restaurants</h1>
 	<hr>
-	<h1><%= @restaurant.name %></h1>
+	<a href="<%= @restaurant.website %>"><h1><%= @restaurant.search_name %></h1></a>
+	<p><%= @restaurant.number %></p>
+	<p><%= @restaurant.address %></p>
 
-
+<ul>
+	<% @restaurant.hours.each do |time| %>
+	<li><%= time %></li>
+	<% end %>
+</ul> 
 
 	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+	<div id="map"><%= "NO MAP FOR YOU" unless @restaurant.place_id %></div>
 </div>
+
+<script>
+	function initMap() {
+		var options = {
+			zoom: 16,
+			center: {lat: <%= @restaurant.lat %>, lng: <%= @restaurant.lng %>}
+		}
+
+		// Open google maps
+		var map = new google.maps.Map(document.getElementById('map'), options);
+
+		// All markers
+		var marker = new google.maps.Marker({
+			position:{lat: <%= @restaurant.lat %>,lng:<%= @restaurant.lng %>},
+			map:map
+		});
+	}
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDM0L5rzpW0d1E60mX58xQackfn69pOmc&callback=initMap">
+</script>
+

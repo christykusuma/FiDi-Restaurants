@@ -1,0 +1,27 @@
+
+<div class="edit-page">
+	<a href="/"><button class="back-button"><</button></a>
+	<h1><%= @restaurant.name %></h1>
+
+	<form class="edit-form" method="post" action="/restaurants/<%= @restaurant.id %>">
+		<input type="hidden" name="_method" value="put">
+
+		<table>
+			<tr>
+				<td><label>Name</label></td>
+				<td><input class="edit-name" name="name" value="<%=@restaurant.name%>"/></td>
+			</tr>
+			<tr>
+				<td><label>Order</label></td>
+				<td><textarea class="edit-text" name="order"><%=@restaurant.order%></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input class="edit-submit" type="submit"></td>
+			</tr>
+		</table>
+
+	</form>
+
+	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+</div>

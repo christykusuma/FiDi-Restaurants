@@ -8,18 +8,33 @@
 		<!-- List of restaurants (based on user) -->
 		<div class="restaurant-list">
 		<h2>List of Restaurants:</h2>
-		<% @current_user.ratings.each do |rating| %>
-				<ul>
-					<li>
-						<a href="/restaurant/<%=rating.restaurant.id %>"><%= rating.restaurant.name %></a> <br>
-						Past orders: <%= rating.restaurant.order %><br>
-						Review: "<%= rating.review %>"<br>
-						Rating: <%= rating.rating %>
-
-					</li>
-				</ul>
-		<% end %>
+			<table>
+				<% @current_user.ratings.each do |rating| %>
+						<tr>
+							<td>
+								<form method="post" action="/restaurant/<%= rating.restaurant.id%>">
+									<input type="hidden" name="_method" value="delete">
+									<input type="hidden" name="id" value="<%= rating.restaurant.id%>">
+									<button class="delete-button" type='submit' class='delete-button'>x</button>
+								</form>
+								<br><br><br><br>
+							</td>
+							<td>
+								<a href="/restaurant/<%=rating.restaurant.id %>"><%= rating.restaurant.name %></a> 
+								<br>
+								Past orders: <%= rating.restaurant.order %><br>
+								Review: "<%= rating.review %>"<br>
+								Rating: <%= rating.rating %>/5 <br><br>
+							</td>
+							<td>
+								<span class="edit-button"><a href="/restaurant/<%=rating.restaurant.id%>/edit">Edit</a></span>
+								<br><br><br><br><br>
+							</td>
+						</tr>
+						<% end %>
+					</table>
 		</div>
+		<br>
 		| <a href="/restaurants/new">Add new restaurant?</a> | 
 	<% end %>
 
