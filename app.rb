@@ -6,6 +6,8 @@ require './models'
 require 'sinatra/flash'
 require 'open-uri'
 require 'json'
+# require 'carrierwave'
+# require 'carrierwave/orm/activerecord'
 
 enable :sessions
 set :database, {adapter: 'sqlite3', database: 'restaurants.sqlite3'}
@@ -64,6 +66,9 @@ get '/restaurant/:id' do
 			@restaurant.number = detail_data["result"]["formatted_phone_number"]
 			@restaurant.hours = detail_data["result"]["opening_hours"]["weekday_text"]
 			@restaurant.website = detail_data["result"]["website"]
+
+			@restaurant.reviews = detail_data["result"]["reviews"].to_json
+
 			@restaurant.lat = detail_data["result"]["geometry"]["location"]["lat"]
 			@restaurant.lng = detail_data["result"]["geometry"]["location"]["lng"]
 			@restaurant.save

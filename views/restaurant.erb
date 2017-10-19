@@ -3,18 +3,42 @@
 	<a href="/"><button class="back-button"><</button></a>
 	<h1>Manhattan FiDi Restaurants</h1>
 	<hr>
+
 	<a href="<%= @restaurant.website %>"><h1><%= @restaurant.search_name %></h1></a>
-	<p><%= @restaurant.number %></p>
 	<p><%= @restaurant.address %></p>
 
-<ul>
-	<% @restaurant.hours.each do |time| %>
-	<li><%= time %></li>
-	<% end %>
-</ul> 
+	<div id="map"><%= "No record of the restaurant within this radius." unless @restaurant.place_id %></div>
+
+	<table class="reviews-table">
+		<tr>	
+			<td>
+				<ul>
+					<strong>Phone Number:</strong><br>
+					<li class="open-hours"><%= @restaurant.number %></li>
+				</ul>
+				<ul class="open-hours">
+					<strong>Hours of Operation:</strong>
+					<% @restaurant.hours.each do |time| %>
+					<li><%= time %></li>
+					<% end %>
+				</ul> 
+				<br><br><br><br><br><br><br><br><br><br><br><br><br>
+			</td>
+			<td>
+				<div class="reviews-list">
+					<ul>
+						<strong>Reviews:</strong><br>
+						<% JSON.parse(@restaurant.reviews).each do |review| %>
+						<li class="reviews"><%= review["author_name"] %></li>
+						<li class="reviews"><%= review["text"] %></li>
+						<% end %>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
 
 	<div class="bg-image"><img src="/imgs/home.jpg"></div>
-	<div id="map"><%= "NO MAP FOR YOU" unless @restaurant.place_id %></div>
 </div>
 
 <script>

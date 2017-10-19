@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171017030751) do
     t.string "number"
     t.string "hours"
     t.string "website"
+    t.text "reviews"
     t.float "lat"
     t.float "lng"
   end
