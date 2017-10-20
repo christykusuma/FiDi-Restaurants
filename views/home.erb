@@ -22,9 +22,12 @@
 							<td>
 								<a href="/restaurant/<%=rating.restaurant.id %>"><%= rating.restaurant.name %></a> 
 								<br>
-								Past orders: <%= rating.restaurant.order %><br>
+								Rating: &nbsp;
+								<% rating.rating.to_i.times do %>
+								<img width="15px" src="/imgs/star-on-big.png">
+								<% end %><br>
 								Review: "<%= rating.review %>"<br>
-								Rating: <%= rating.rating %>/5 <br><br>
+								Past orders: <%= rating.restaurant.order %><br>
 							</td>
 							<td>
 								<span class="edit-button"><a href="/restaurant/<%=rating.restaurant.id%>/edit">Edit</a></span>
@@ -35,7 +38,7 @@
 					</table>
 		</div>
 		<br>
-		| <a href="/restaurants/new">Add new restaurant?</a> | 
+		| <a href="/restaurants/newsfeed">Newsfeed</a> | <a href="/restaurants/new">Add new restaurant?</a> | 
 	<% end %>
 
 	<% if @current_user %>

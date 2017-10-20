@@ -4,14 +4,18 @@
 	<h1>Manhattan FiDi Restaurants</h1>
 	<hr>
 
-	<a href="<%= @restaurant.website %>"><h1><%= @restaurant.search_name %></h1></a>
+	<a href="<%= @restaurant.website %>" target="_blank"><h1><%= @restaurant.search_name %></h1></a>
 	<p><%= @restaurant.address %></p>
 
 	<div id="map"><%= "No record of the restaurant within this radius." unless @restaurant.place_id %></div>
 
 	<table class="reviews-table">
 		<tr>	
-			<td>
+			<td class="restaurant-info">
+				<br>
+				<ul>
+					<strong>Status: </strong><%= @restaurant.print_open %>
+				</ul>
 				<ul>
 					<strong>Phone Number:</strong><br>
 					<li class="open-hours"><%= @restaurant.number %></li>
@@ -22,15 +26,21 @@
 					<li><%= time %></li>
 					<% end %>
 				</ul> 
-				<br><br><br><br><br><br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br>
 			</td>
-			<td>
-				<div class="reviews-list">
+			<td><br>
 					<ul>
 						<strong>Reviews:</strong><br>
+						<hr>
+						<div class="reviews-list">
 						<% JSON.parse(@restaurant.reviews).each do |review| %>
-						<li class="reviews"><%= review["author_name"] %></li>
-						<li class="reviews"><%= review["text"] %></li>
+						<li class="reviews" style="color: #b51c47;"><%= review["author_name"] %>
+								&nbsp;	
+							<% review["rating"].to_i.times do %>
+							<img width="13px" src="/imgs/star-on-big.png">
+							<% end %>
+						</li>
+						<li class="reviews">&#34;<%= review["text"] %>&#34;</li><br>
 						<% end %>
 					</ul>
 				</div>

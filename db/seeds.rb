@@ -35,6 +35,10 @@ Restaurant.create([
 	id: 5, 
 	name: 'Hale and Hearty', 
 	order: 'Salad, soup'
+}, {
+	id: 6, 
+	name: 'Temple Court', 
+	order: 'Eggs'
 }])
 
 Rating.create([
@@ -72,6 +76,13 @@ Rating.create([
 	restaurant_id: 5, 
 	rating: 1,
 	review: "It's okay, very salty!",
+	has_been: true
+}, {
+	id: 6, 
+	user_id: 1, 
+	restaurant_id: 6, 
+	rating: 1,
+	review: "Opens at odd hours!",
 	has_been: true
 }])
 

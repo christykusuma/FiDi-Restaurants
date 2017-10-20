@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20171017030751) do
   create_table "ratings", force: :cascade do |t|
     t.integer "user_id"
     t.integer "restaurant_id"
+    t.datetime "created_at"
     t.integer "rating"
     t.text "review"
     t.boolean "has_been"

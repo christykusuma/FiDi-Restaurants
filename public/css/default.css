@@ -18,20 +18,24 @@ a:hover {
   z-index: -3;
 }
 
-.home-page, .new-rating-page, .new-restaurant-page, .signup-page, .restaurant-page, .edit-page {
-	padding: 70px 20px 150px 20px;
+.home-page, .new-rating-page, .new-restaurant-page, .signup-page, .restaurant-page, .edit-page, .newsfeed-page {
+	padding: 30px 20px 150px 20px;
 	background-color: rgba(0, 0, 0, 0.8);
 	border-style: double;
 	border-radius: 20px;
 	border-width: 10px;
 	color: white;
 	text-align: center;
-	width: 55%;
+	width: 710px;
 	margin: 150px auto;
 	font-family: 'Poppins', sans-serif;
 }
 
-.home-page h1, .new-rating-page h1, .new-restaurant-page h1, .signup-page h1, .restaurant-page h1, .edit-page h1{
+.home-page {
+	padding-top: 100px;
+}
+
+.home-page h1, .new-rating-page h1, .new-restaurant-page h1, .signup-page h1, .restaurant-page h1, .edit-page h1, .newsfeed-page h1{
 	font-size: 2em;
 }
 
@@ -48,14 +52,14 @@ a:hover {
 }
 
 .back-button {
-	position: absolute;
-	top: 170px;
-	left: 300px;
+	margin-left: -660px;
+	margin-top: -500px;
 	padding: 5px 15px;
 	border-radius: 5px;
 	background-color: black;
 	font-size: 1.5em;
 	color: white;
+	margin-bottom: 40px;
 }
 
 .back-button a {
@@ -73,6 +77,23 @@ input[type=submit] {
 	width: 240px;
 	margin-right: 15px;
 	text-transform: uppercase;
+}
+
+/* Newsfeed page */
+.newsfeed-review {
+	border-style: solid;
+	border-color: black;
+	text-align: left;
+	background-color: black;
+	border-radius: 15px;
+	margin: 20px 20px 20px 50px;
+	padding: 15px;
+	width: 400px;
+}
+
+div.newsfeed-page > div:nth-of-type(even) {
+	float: right;
+	background-color: blue;
 }
 
 /* Restaurant page */
@@ -104,53 +125,54 @@ input[type=submit] {
 	text-align: left;
 	font-size: 0.85em;
 	margin-left: 50px;
+	width: 600px;
+}
+
+.restaurant-page .restaurant-info {
+	vertical-align: top;
+}
+
+.restaurant-page strong {
+	font-size: 1.2em;
+	color: orange;
 }
 
 /* New ratings page */
 .review-text {
-	position: absolute;
-	top: 385px;
-	right: 540px;
 	width: 150px;
 	height: 60px;
-}
-
-.rating-submit {
-	position: absolute;
-	top: 450px;
-	right: 520px;
+	margin-left: -210px;
 }
 
 .rating-form input[type=submit] {
 	width: 160px;
+	margin-left: -190px;
+	margin-top: -400px;
 }
+
+
 
 /* New restaurant page */
 
+.restaurant-form td {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 .restaurant-text {
-	position: absolute;
-	top: 380px;
-	right: 540px;
 	width: 150px;
 	height: 60px;
 }
 
 .restaurant-name {
-	position: absolute;
-	top: 340px;
-	height: 23px;
-	right: 540px;	
+	height: 23px;	
 	width: 150px;
-}
-
-.restaurant-submit {
-	position: absolute;
-	top: 450px;
-	right: 525px;
 }
 
 .restaurant-form input[type=submit] {
 	width: 155px;
+	margin-top: -400px;
+	margin-left: 20px;
 }
 
 /* Home page */
@@ -158,7 +180,7 @@ input[type=submit] {
 .restaurant-list {
 	list-style-type: none;
 	text-align: left;
-	padding-left: 150px;
+	padding-left: 100px;
 }
 
 .restaurant-list li {

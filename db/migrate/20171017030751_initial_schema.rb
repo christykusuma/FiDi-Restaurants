@@ -23,6 +23,7 @@ class InitialSchema < ActiveRecord::Migration[5.1]
     create_table :ratings do |t|
       t.references :user, foreign_key: {to_table: :users}, index: true
       t.references :restaurant, foreign_key: {to_table: :restaurants}, index: true
+      t.datetime :created_at
       t.integer :rating
       t.text :review
       t.boolean :has_been

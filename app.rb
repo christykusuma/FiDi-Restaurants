@@ -6,6 +6,8 @@ require './models'
 require 'sinatra/flash'
 require 'open-uri'
 require 'json'
+require "rack/utf8_sanitizer"
+
 # require 'carrierwave'
 # require 'carrierwave/orm/activerecord'
 
@@ -28,6 +30,15 @@ get '/' do
 	@users = User.all
 	@ratings = Rating.all
   	erb :home
+end
+
+# Newsfeed page
+get '/restaurants/newsfeed' do 
+	@users = User.all
+	@restaurants = Restaurant.all
+	@ratings = Rating.all
+	@ratings = Rating.all.order(id: :desc)
+	erb :newsfeed
 end
 
 # Delete restaurant
@@ -60,7 +71,8 @@ get '/restaurant/:id' do
 		begin
 			data = JSON.parse open("https://maps.googleapis.com/maps/api/place/radarsearch/json?location=40.7074909,-74.01127639999999&radius=1000&type=restaurant&name=#{@restaurant.name}&language=en&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
 			@restaurant.place_id = data["results"].first["place_id"]
-			detail_data = JSON.parse open("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@restaurant.place_id}&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
+			detail_data = JSON.parse open("https://maps.googleapis.com/maps/api/place/details/json?maxwidth=400&placeid=#{@restaurant.place_id}&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
+
 			@restaurant.search_name = detail_data["result"]["name"]
 			@restaurant.address = detail_data["result"]["formatted_address"]
 			@restaurant.number = detail_data["result"]["formatted_phone_number"]
@@ -71,6 +83,7 @@ get '/restaurant/:id' do
 
 			@restaurant.lat = detail_data["result"]["geometry"]["location"]["lat"]
 			@restaurant.lng = detail_data["result"]["geometry"]["location"]["lng"]
+
 			@restaurant.save
 		rescue 
 			p "Failed to pull place data"
@@ -108,6 +121,7 @@ post '/restaurants/:id/ratings' do
 	rating = Rating.new({
 		user_id: @current_user.id,
 		restaurant_id: restaurant.id,
+		created_at: DateTime.now.change(:offset => "+0000"),
 		rating: params[:rating],
 		review: params[:review],
 		has_been: true

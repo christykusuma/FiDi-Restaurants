@@ -1,0 +1,17 @@
+
+<div class="newsfeed-page">
+	<a href="/"><button class="back-button"><</button></a>
+	<h1>Manhattan FiDi Restaurants</h1>
+	<hr>
+
+		<% @ratings.each do |rating| %>
+			<div class="newsfeed-review">
+				<span style="color: #b51c47;"><%= rating.user.first %> <%= rating.user.last %></span> recently went to <a href=<%="#{rating.restaurant.website}"%> target="_blank"><%= rating.restaurant.name %></a><br>
+				<%= rating.created_at.strftime("%I:%M%p") %> | <%= rating.created_at.strftime("%B %d, %Y") %><br>
+				<strong>Rating:<strong> <%= rating.rating %>/5<br>
+				<strong>Review:<strong> &#34;<%= rating.review %>&#34;
+			</div>
+		<% end %>	
+
+	<div class="bg-image"><img src="/imgs/home.jpg"></div>
+</div>
