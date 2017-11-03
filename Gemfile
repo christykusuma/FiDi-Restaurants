@@ -2,7 +2,16 @@
 source 'http://rubygems.org'
 
 gem 'sinatra'
-gem 'sqlite3'
+
+group :development do
+	gem 'sqlite3'
+end
+
+
+group :production do
+	gem 'pg'
+end
+
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'sinatra-flash'
