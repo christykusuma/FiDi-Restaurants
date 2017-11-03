@@ -1,4 +1,3 @@
-
 User.create([
 {
 	id: 1, 
@@ -12,7 +11,14 @@ User.create([
 	last: 'Braxton', 
 	username: 'vbraxton', 
 	password: '2'
-}])
+}, {
+	id: 3, 
+	first: 'John', 
+	last: 'Doe', 
+	username: 'jdoe', 
+	password: '1'
+}
+])
 
 Restaurant.create([
 {
@@ -37,8 +43,24 @@ Restaurant.create([
 	order: 'Salad, soup'
 }, {
 	id: 6, 
-	name: 'Temple Court', 
-	order: 'Eggs'
+	name: 'Melt Shop', 
+	order: 'Grilled cheese sandwhich'
+}, {
+	id: 7, 
+	name: 'Thai Sliders', 
+	order: 'Pork sliders, pad si-eew, panang curry'
+}, {
+	id: 8, 
+	name: 'Dos Toros Taqueria', 
+	order: 'Tacos, burritos, grilled corn'
+}, {
+	id: 9, 
+	name: 'Chipotle', 
+	order: 'Mixed greens salad with beans, sour cream and grilled chicken'
+}, {
+	id: 10, 
+	name: 'Bocadillo', 
+	order: 'Bacon wrapped dates, tortilla española'
 }])
 
 Rating.create([
@@ -75,14 +97,42 @@ Rating.create([
 	user_id: 2, 
 	restaurant_id: 5, 
 	rating: 1,
-	review: "It's okay, very salty!",
+	review: "It's okay, food is very salty!",
 	has_been: true
 }, {
 	id: 6, 
 	user_id: 1, 
 	restaurant_id: 6, 
-	rating: 1,
-	review: "Opens at odd hours!",
+	rating: 5,
+	review: "This place really hits the spot!",
+	has_been: true
+}, {
+	id: 7, 
+	user_id: 3, 
+	restaurant_id: 7, 
+	rating: 3,
+	review: "Best pork sliders I've ever eaten",
+	has_been: true
+}, {
+	id: 8, 
+	user_id: 1, 
+	restaurant_id: 8, 
+	rating: 3,
+	review: "Better version of Chipotle, very good quality!",
+	has_been: true
+}, {
+	id: 9, 
+	user_id: 3, 
+	restaurant_id: 9, 
+	rating: 2,
+	review: "It's okay.",
+	has_been: true
+}, {
+	id: 10, 
+	user_id: 1, 
+	restaurant_id: 10, 
+	rating: 5,
+	review: "Love this place! Serves breakfast food too!",
 	has_been: true
 }])
 

@@ -6,7 +6,6 @@ require './models'
 require 'sinatra/flash'
 require 'open-uri'
 require 'json'
-require "rack/utf8_sanitizer"
 
 # require 'carrierwave'
 # require 'carrierwave/orm/activerecord'
@@ -63,6 +62,14 @@ get '/restaurant/:id/edit' do
 	@restaurant = Restaurant.find(params[:id])
 	erb :edit
 end
+
+# get '/restaurant/:restaurant_id/photo/:id' do
+# 	restaurant = Restaurant.find(params[:restaurant_id])
+# 	reference = restaurant.array_photoreferences.first
+
+# 	content_type 'application/octet-stream'
+# 	JSON.parse open("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{reference}&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
+# end
 
 # Restaurant page
 get '/restaurant/:id' do 

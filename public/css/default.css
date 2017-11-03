@@ -206,6 +206,18 @@ div.newsfeed-page > div:nth-of-type(even) {
 	padding-right: 25px;
 }
 
+.examples {
+	background-color: white;
+	padding: 9px;
+	color: black;
+	text-align: left;
+	width: 240px;
+	margin-bottom: 0;
+	margin-top: 50px;
+	position: absolute;
+	font-size: 0.8em;
+}
+
 /* Flash banner */
 #notice {
 	font-family: 'Poppins', sans-serif;

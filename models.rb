@@ -1,4 +1,4 @@
-
+ 
 class User < ActiveRecord::Base
   has_many :ratings
   has_many :restaurants, through: :ratings
@@ -38,7 +38,6 @@ class Restaurant < ActiveRecord::Base
   # def convert_photo
   # 	reference = array_photoreferences.first
   # 	photo = JSON.parse open("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{reference}&key=AIzaSyB2ULJzC_RC0aOjO3aMnEOuw3WPjfCzu7A").read
- 	# photo = photo.tidy_bytes
   # 	output = ""
   # 	output << "<img src=\"photo\">"
   # 	output
