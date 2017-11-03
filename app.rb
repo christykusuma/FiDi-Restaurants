@@ -1,17 +1,20 @@
 
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'sqlite3'
 require './models'
 require 'sinatra/flash'
 require 'open-uri'
 require 'json'
 
+configure :development do 
+	require 'sqlite3'
+	set :database, {adapter: 'sqlite3', database: 'restaurants.sqlite3'}
+end
+
 # require 'carrierwave'
 # require 'carrierwave/orm/activerecord'
 
 enable :sessions
-set :database, {adapter: 'sqlite3', database: 'restaurants.sqlite3'}
 
 # Before anything, check if there is a user
 before do
