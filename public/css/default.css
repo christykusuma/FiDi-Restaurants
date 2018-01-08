@@ -18,6 +18,10 @@ a:hover {
   z-index: -3;
 }
 
+.bg-image img {
+	width: 1440px;
+}
+
 .home-page, .new-rating-page, .new-restaurant-page, .signup-page, .restaurant-page, .edit-page, .newsfeed-page {
 	padding: 30px 20px 150px 20px;
 	background-color: rgba(0, 0, 0, 0.8);
