@@ -47,8 +47,11 @@ Follow regular Heroku deployment procedures and it should work just fine. There 
 
 ## Built With
 
+* CSS - Used for styling
 * [Ruby Sinatra](http://sinatrarb.com/documentation.html) - The web framework used
 * [SQL](https://dev.mysql.com/doc/) - Database used for development
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/) - API used for maps and markers
+* [Google Places API](https://developers.google.com/places/web-service/) - API used for gathering restaurant information
 
 ## Authors
 
