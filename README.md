@@ -1,237 +1,60 @@
+# FiDi Restaurants
 
-# Restaurants
+This app is aimed at helping New Yorkers, who work at the Financial District, keep track of restaurants near their offices. Once a restaurant is bookmarked, you are able to pull out information based off its closest branch to you and write down your thoughts and ratings. You will also be able to check out where other people have gone through your newsfeed.<br><br>
+Feel free to play around with the <a target="_blank" href="https://fidi-restaurants.herokuapp.com/">demo</a> or click the image to enlarge it. 
 
-Save a list of restaurants around Manhattan that you've been to. You can rate them and record the dishes you've ordered. 
+## Getting Started
 
-### Getting started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-```bash
-touch README.md app.rb Gemfile Rakefile
-mkdir public views
-mkdir public/css public/js
-touch public/css/default.css
-touch views/home.erb views/restaurants.erb
-```
+### Prerequisites
 
-### Gemfile
-We'll be using the following gems, specified in our Gemfile:
+You would need to register for a Google API Key for the maps and the Google Search features used for each individual restaurant.
+
+Add your API Key as an environment variable in your `~/.bash_profile`.
 
 ```
-source 'http://rubygems.org'
-
-gem 'sinatra'
-gem 'sqlite3'
-gem 'sinatra-activerecord'
-gem 'rake'
+export GOOGLEMAP_API_KEY="[YOUR_API_KEY_HERE]"
 ```
 
-And now we'll `bundle` install.
-
-### Rakefile
-
-To setup our Rakefile (which will help with running migrations) we'll use the following:
+In the terminal:
 
 ```
-require 'sinatra/activerecord/rake'
-require './app'
+source ~/.bash_profile
 ```
 
-This loads the rake tools for sinatra activerecord.. and then our application.
+### Installing
 
-### Initial boilerplate for starting our app.rb
-
-```ruby
-# app.rb
-require 'sinatra'
-require 'sinatra/activerecord'
-require 'sqlite3'
-
-set :database, {adapter: 'sqlite3', database: 'restaurants.sqlite3'}
-
-get '/' do
-  erb :home
-end
-```
-
-### Create Migration
-
-We run the following command to run our first migration:
+Go to your terminal and bundle install all the gems to get it up and running. 
 
 ```
-rake db:create_migration NAME=initial_schema
+Bundle install
 ```
 
-### Editing the migration
-
-We now want to build our schema for the three tables:
-
+If you want to reset the database, you can run these commands.
 
 ```
-users
---
-id (int, PK)
-first (string)
-last (string)
-username (string)
-password (string)
-
-restaurants
---
-id (int, PK)
-name (string)
-orders (text)
-
-ratings 
---
-id (int, PK)
-user_id (int, FK)
-restaurant_id (int, FK)
-rating (int)
-has_been (bool)
-
+rake db:drop
+rake db:migrate
+rake db:seed 
 ```
 
-### Create migration
+Or you can also run `rake db:reset`, which does it all.
 
-We created our migration with the following:
+## Deployment
 
-```ruby
-class InitialSchema < ActiveRecord::Migration[5.1]
-  def change
-    create_table :users do |t|
-      t.string :first
-      t.string :last
-      t.string :username
-      t.string :password
-    end
-    create_table :restaurants do |t|
-      t.string :name
-      t.text :order
-    end
-    create_table :ratings do |t|
-      t.references :user, foreign_key: {to_table: :users}, index: true
-      t.references :restaurant, foreign_key: {to_table: :restaurants}, index: true
-      t.integer :rating
-      t.boolean :has_been
-    end
-  end
-end
-```
+Follow regular Heroku deployment procedures and it should work just fine. There shouldn't be any extra steps that you would need to take.
 
-And then ran: `rake db:migrate`
+## Built With
 
-### Building our models
+* [Ruby Sinatra](http://sinatrarb.com/documentation.html) - The web framework used
+* [SQL](https://dev.mysql.com/doc/) - Database used for development
 
-We'll next want a models.rb file in our project root which we'll use to extend from activerecord and define the relations between tables.
+## Authors
 
-`touch models.rb`
+* **Christy Kusuma** - [ChristyKusuma](https://github.com/christykusuma)
 
-And then let's require it in our `app.rb`
+## License
 
-Let's have our models inherit from the ActiveRecord::Base:
-
-```ruby
-class User < ActiveRecord::Base
-end
-class Restaurant < ActiveRecord::Base
-end
-class Rating < ActiveRecord::Base
-end
-```
-
-We'll then touch our a seeds file: `touch db/seeds.rb`
-
-### Loading our seed data
-
-`rake db:seed`
-
-### Define ActiveRecord Associations
-
-User has many Ratings
-Ratings belongs to a User
-
-Restaurant has many Ratings
-Ratings belongs to a Restaurant
-
-+ User has many Restaurants (through Ratings)
-+ Restaurant has many Users (through Ratings)
-
-```ruby
-class User < ActiveRecord::Base
-  has_many :ratings
-  has_many :restaurants, through: :ratings
-end
-
-class Restaurant < ActiveRecord::Base
-  has_many :ratings
-  has_many :users, through: :ratings
-end
-
-class Rating < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :restaurant
-end
-```
-
-### Allowing the User to add a new Restaurant
-
-We'll create for a form for adding restaurants.
-
-`touch views/new_restaurant.erb`
-
-### Creating some testing data
-
-```ruby
-User.create([
-{
-	id: 1, 
-	first: 'Christy', 
-	last: 'Kusuma', 
-	username: 'ckusuma', 
-	password: 'nycda1'
-}, {
-	id: 2, 
-	first: 'Vikki', 
-	last: 'Braxton', 
-	username: 'vbraxtvi', 
-	password: 'nycda2'
-}])
-
-Restaurant.create([
-{
-	id: 1, 
-	name: 'Open Kitchen', 
-	order: 'Sushi'
-}, {
-	id: 2, 
-	name: 'Grk', 
-	order: 'Portobello griller'
-}])
-
-Rating.create([
-{
-	id: 1, 
-	user_id: 1, 
-	restaurant_id: 1, 
-	rating: 3,
-	has_been: true
-}, {
-	id: 2, 
-	user_id: 2, 
-	restaurant_id: 2, 
-	rating: 4,
-	has_been: true
-}])
-```
-
-### If you changed the schema
-
-You should `rake db:drop` then `rake db:migrate` and `rake db:seed` or `rake db:reset` does it all.
-
-`sqlite3 restaurants.sqlite3`
-
-### If you want to load database on console
-
-You should `irb` and `load './app.rb'
-
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
